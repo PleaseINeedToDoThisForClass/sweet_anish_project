@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Writing Practice</title>
+  <style>
+    :root {
+      --primary-color: #3f51b5;
+      --primary-light: #7986cb;
+      --primary-dark: #303f9f;
+      --text-light: #ffffff;
+      --text-dark: #333333;
+      --background-light: #f5f5f5;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--primary-color);
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      position: relative;
+    }
+    
+    h1 {
+      margin: 0;
+      font-size: 26px;
+      font-weight: 500;
+    }
+    
+    .timer-controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    
+    .btn {
+      background-color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 14px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s ease;
+      font-weight: 500;
+      color: var(--primary-color);
+    }
+    
+    .btn:hover {
+      background-color: #e0e0e0;
+      transform: translateY(-2px);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    
+    .back-button {
+      position: absolute;
+      left: -85px;
+      top: 0;
+      background-color: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s ease;
+    }
+    
+    .back-button:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+    
+    .back-button i {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-left: 2px solid white;
+      border-bottom: 2px solid white;
+      transform: rotate(45deg);
+    }
+    
+    .prompt-box {
+      background-color: white;
+      color: var(--text-dark);
+      border-radius: 8px;
+      padding: 25px;
+      margin-bottom: 5px;
+      min-height: 150px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* New styles for the prompt actions container */
+    .prompt-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 25px;
+    }
+    
+    .new-prompt-button {
+      background-color: white;
+      color: var(--primary-color);
+      border: none;
+      border-radius: 4px;
+      padding: 8px 14px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .new-prompt-button:hover {
+      background-color: #f0f0f0;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+    
+    .new-prompt-button i {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      position: relative;
+    }
+    
+    .new-prompt-button i:before,
+    .new-prompt-button i:after {
+      content: '';
+      position: absolute;
+      background-color: var(--primary-color);
+    }
+    
+    .new-prompt-button i:before {
+      width: 12px;
+      height: 2px;
+      top: 5px;
+      left: 0;
+    }
+    
+    .new-prompt-button i:after {
+      width: 2px;
+      height: 12px;
+      top: 0;
+      left: 5px;
+    }
+    
+    .section-title {
+      margin-top: 30px;
+      margin-bottom: 15px;
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+    
+    .response-area {
+      margin-bottom: 10px;
+      position: relative;
+    }
+    
+    .response-textarea {
+      width: 100%;
+      min-height: 250px;
+      background-color: white;
+      color: var(--text-dark);
+      border-radius: 8px;
+      padding: 25px;
+      border: none;
+      resize: vertical;
+      font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      box-sizing: border-box;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s ease;
+    }
+    
+    .response-textarea:focus {
+      outline: none;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15), 0 0 0 2px var(--primary-light);
+    }
+    
+    .word-count {
+      text-align: right;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 20px;
+      padding-right: 5px;
+    }
+    
+    .action-buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 15px;
+    }
+    
+    .action-button {
+      background-color: white;
+      color: var(--primary-color);
+      border: none;
+      border-radius: 20px;
+      padding: 10px 24px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .action-button:hover {
+      background-color: #f0f0f0;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .timer-display {
+      background-color: white;
+      color: var(--primary-color);
+      border: none;
+      border-radius: 4px;
+      padding: 8px 14px;
+      font-size: 15px;
+      min-width: 70px;
+      text-align: center;
+      font-weight: bold;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* New styles for french accents buttons */
+    .accent-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+    
+    .accent-button {
+      background-color: white;
+      color: var(--primary-color);
+      border: none;
+      border-radius: 4px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      min-width: 36px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .accent-button:hover {
+      background-color: #f0f0f0;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+    
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        padding-top: 40px;
+      }
+      
+      .timer-controls {
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      .back-button {
+        top: 15px;
+      }
+      
+      .accent-buttons {
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="choose_activity.html" class="back-button"><i></i> Back</a>
+      <h1>Writing Practice</h1>
+      <div class="timer-controls">
+        <button id="resetTimer" class="btn">Reset</button>
+        <button id="startTimer" class="btn">Start</button>
+        <div id="timerDisplay" class="timer-display">1:00:00</div>
+      </div>
+    </header>
+    
+    <div class="prompt-box" id="promptBox">
+      <!-- Prompt text will go here -->
+    </div>
+    
+    <!-- New prompt button added below prompt box -->
+    <div class="prompt-actions">
+      <button id="newPromptButton" class="new-prompt-button"><i></i> New Prompt</button>
+    </div>
+    
+    <div class="section-title">Response Area</div>
+    
+    <div class="response-area">
+      <textarea id="responseTextarea" class="response-textarea" placeholder="Write your response here..."></textarea>
+    </div>
+    
+    <div id="wordCount" class="word-count">0 words</div>
+    
+    <!-- New section for French accented letters -->
+    <div class="accent-buttons" id="accentButtons">
+      <button class="accent-button" data-char="é">é</button>
+      <button class="accent-button" data-char="è">è</button>
+      <button class="accent-button" data-char="ê">ê</button>
+      <button class="accent-button" data-char="ë">ë</button>
+      <button class="accent-button" data-char="à">à</button>
+      <button class="accent-button" data-char="â">â</button>
+      <button class="accent-button" data-char="ù">ù</button>
+      <button class="accent-button" data-char="û">û</button>
+      <button class="accent-button" data-char="ü">ü</button>
+      <button class="accent-button" data-char="ÿ">ÿ</button>
+      <button class="accent-button" data-char="ï">ï</button>
+      <button class="accent-button" data-char="î">î</button>
+      <button class="accent-button" data-char="ô">ô</button>
+      <button class="accent-button" data-char="œ">œ</button>
+      <button class="accent-button" data-char="ç">ç</button>
+      <button class="accent-button" data-char="É">É</button>
+      <button class="accent-button" data-char="È">È</button>
+      <button class="accent-button" data-char="Ê">Ê</button>
+      <button class="accent-button" data-char="À">À</button>
+      <button class="accent-button" data-char="Ç">Ç</button>
+      <button class="accent-button" data-char="Ù">Ù</button>
+      <button class="accent-button" data-char="Û">Û</button>
+      <button class="accent-button" data-char="Ô">Ô</button>
+      <button class="accent-button" data-char="«">«</button>
+      <button class="accent-button" data-char="»">»</button>
+    </div>
+    
+    <div class="action-buttons">
+      <button id="saveButton" class="action-button">Submit Response</button>
+    </div>
+  </div>
+
+  <script>
+    // Timer functionality
+    const timerDisplay = document.getElementById('timerDisplay');
+    const resetButton = document.getElementById('resetTimer');
+    const startButton = document.getElementById('startTimer');
+    const responseTextarea = document.getElementById('responseTextarea');
+    const saveButton = document.getElementById('saveButton');
+    const wordCountDisplay = document.getElementById('wordCount');
+    const newPromptButton = document.getElementById('newPromptButton');
+    const promptBox = document.getElementById('promptBox');
+    const accentButtons = document.querySelectorAll('.accent-button');
+    let timerRunning = false;
+    let timerInterval;
+    let timeLeft = 3600; // 1 hour in seconds
+    
+    async function fetchAIWritingPrompt() {
+      try {
+          const response = await fetch("http://localhost:3000/generate-prompt", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" }
+          });
+
+          if (!response.ok) {
+              throw new Error("Failed to fetch prompt. Server responded with " + response.status);
+          }
+
+          const data = await response.json();
+          document.getElementById("promptBox").textContent = data.prompt;
+      } catch (error) {
+          console.error("❌ Error fetching AI prompt:", error);
+          document.getElementById("promptBox").textContent = "Erreur: Impossible de charger un sujet.";
+      }
+    }
+
+    // Load an AI-generated prompt when the page loads
+    fetchAIWritingPrompt();
+
+    // Attach to "New Prompt" button
+    newPromptButton.addEventListener('click', function () {
+        if (responseTextarea.value.trim() !== '') {
+            if (confirm('Générer un nouveau sujet supprimera votre réponse actuelle. Continuer ?')) {
+                responseTextarea.value = '';
+                wordCountDisplay.textContent = '0 mots';
+                fetchAIWritingPrompt();
+            }
+        } else {
+            fetchAIWritingPrompt();
+        }
+    });
+    
+    function updateTimerDisplay() {
+      const hours = Math.floor(timeLeft / 3600);
+      const minutes = Math.floor((timeLeft % 3600) / 60);
+      const seconds = timeLeft % 60;
+      
+      // Format as HH:MM:SS
+      if (hours > 0) {
+        timerDisplay.textContent = `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      } else {
+        timerDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+      }
+    }
+    
+    function countWords(text) {
+      // Trim the text and split by whitespace
+      return text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+    }
+    
+    // Update word count when text changes
+    responseTextarea.addEventListener('input', function() {
+      const count = countWords(responseTextarea.value);
+      wordCountDisplay.textContent = count === 1 ? '1 mot' : `${count} mots`;
+    });
+    
+    startButton.addEventListener('click', function() {
+      if (timerRunning) {
+        clearInterval(timerInterval);
+        timerRunning = false;
+        startButton.textContent = 'Start';
+      } else {
+        timerInterval = setInterval(function() {
+          if (timeLeft > 0) {
+            timeLeft--;
+            updateTimerDisplay();
+          } else {
+            clearInterval(timerInterval);
+            timerRunning = false;
+            startButton.textContent = 'Start';
+            alert('Time is up!');
+          }
+        }, 1000);
+        timerRunning = true;
+        startButton.textContent = 'Pause';
+      }
+    });
+    
+    resetButton.addEventListener('click', function() {
+      clearInterval(timerInterval);
+      timerRunning = false;
+      timeLeft = 3600;
+      updateTimerDisplay();
+      startButton.textContent = 'Start';
+    });
+    
+    // Save button functionality
+    saveButton.addEventListener('click', function() {
+      const text = responseTextarea.value;
+      if (text.trim() !== '') {
+        alert('Response saved!');
+        // In a real app, you would save this to a database or local storage
+      } else {
+        alert('Please write a response before saving.');
+      }
+    });
+
+    // Function to insert accented character at cursor position
+    function insertAccentedChar(char) {
+      const startPos = responseTextarea.selectionStart;
+      const endPos = responseTextarea.selectionEnd;
+      const textBefore = responseTextarea.value.substring(0, startPos);
+      const textAfter = responseTextarea.value.substring(endPos);
+      
+      // Set new text and cursor position
+      responseTextarea.value = textBefore + char + textAfter;
+      responseTextarea.selectionStart = startPos + 1;
+      responseTextarea.selectionEnd = startPos + 1;
+      
+      // Update word count
+      const count = countWords(responseTextarea.value);
+      wordCountDisplay.textContent = count === 1 ? '1 mot' : `${count} mots`;
+      
+      // Focus back on textarea
+      responseTextarea.focus();
+    }
+    
+    // Add event listeners to all accent buttons
+    accentButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const char = this.getAttribute('data-char');
+        insertAccentedChar(char);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #3f51b5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px 0;
+      overflow-y: auto;
+      position: relative;
+    }
+    
+    .background-shapes {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      top: 0;
+      left: 0;
+    }
+    
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .container {
+      background-color: white;
+      padding: 25px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 360px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      z-index: 10;
+      position: relative;
+      margin: 20px 0;
+    }
+    
+    h1 {
+      color: #3f51b5;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 22px;
+    }
+    
+    .logo {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    
+    .logo svg {
+      width: 60px;
+      height: 60px;
+    }
+    
+    .input-group {
+      margin-bottom: 15px;
+      position: relative;
+    }
+    
+    .input-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: #555;
+      font-size: 13px;
+    }
+    
+    .input-group input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 25px;
+      font-size: 14px;
+      transition: all 0.3s;
+      outline: none;
+    }
+    
+    .input-group input:focus {
+      border-color: #3f51b5;
+      box-shadow: 0 0 0 2px rgba(63, 81, 181, 0.2);
+    }
+    
+    .password-toggle {
+      position: absolute;
+      right: 15px;
+      top: 38px;
+      cursor: pointer;
+      color: #777;
+      font-size: 14px;
+    }
+    
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #3f51b5;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 5px;
+    }
+    
+    button:hover {
+      background-color: #303f9f;
+    }
+    
+    .social-login {
+      margin-top: 20px;
+      text-align: center;
+    }
+    
+    .social-login p {
+      color: #777;
+      margin-bottom: 10px;
+      position: relative;
+      font-size: 13px;
+    }
+    
+    .social-login p:before,
+    .social-login p:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 30%;
+      height: 1px;
+      background-color: #ddd;
+    }
+    
+    .social-login p:before {
+      left: 0;
+    }
+    
+    .social-login p:after {
+      right: 0;
+    }
+    
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .social-icons button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 14px;
+    }
+    
+    .social-icons button.google {
+      background-color: #DB4437;
+    }
+    
+    .social-icons button.facebook {
+      background-color: #4267B2;
+    }
+    
+    .social-icons button.apple {
+      background-color: #000;
+    }
+    
+    .login-link {
+      text-align: center;
+      margin-top: 15px;
+      color: #555;
+      font-size: 13px;
+    }
+    
+    .login-link a {
+      color: #3f51b5;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+    
+    @media (max-height: 700px) {
+      .container {
+        padding: 15px;
+      }
+      
+      .logo svg {
+        width: 50px;
+        height: 50px;
+      }
+      
+      h1 {
+        margin-bottom: 15px;
+        font-size: 20px;
+      }
+      
+      .input-group {
+        margin-bottom: 10px;
+      }
+      
+      .input-group input {
+        padding: 10px;
+      }
+      
+      button {
+        padding: 10px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px 15px;
+        margin: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="background-shapes">
+    <!-- Background shapes will be added via JavaScript -->
+  </div>
+
+  <div class="container">
+    <div class="logo">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="45" fill="#3f51b5" />
+        <path d="M65 50C65 58.2843 58.2843 65 50 65C41.7157 65 35 58.2843 35 50C35 41.7157 41.7157 35 50 35C58.2843 35 65 41.7157 65 50Z" fill="white" />
+        <path d="M50 35V65M35 50H65" stroke="#3f51b5" stroke-width="4" />
+      </svg>
+    </div>
+    
+    <h1>Create Your Account</h1>
+    
+    <form>
+      <div class="input-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="Enter your email" />
+      </div>
+      
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Create a strong password" />
+        <span class="password-toggle">👁️</span>
+      </div>
+      
+      <button type="submit">Create Account</button>
+    </form>
+    
+    <div class="social-login">
+      <p>Or sign up with</p>
+      <div class="social-icons">
+        <button class="google" aria-label="Sign up with Google">G</button>
+        <button class="facebook" aria-label="Sign up with Facebook">f</button>
+        <button class="apple" aria-label="Sign up with Apple">A</button>
+      </div>
+    </div>
+    
+    <div class="login-link">
+      Already have an account? <a href="login.html">Log in</a>
+    </div>
+  </div>
+
+  <script>
+    // Add background shapes
+    const shapesContainer = document.querySelector('.background-shapes');
+    for (let i = 0; i < 10; i++) {
+      const shape = document.createElement('div');
+      shape.classList.add('shape');
+      
+      const size = Math.random() * 150 + 50;
+      shape.style.width = `${size}px`;
+      shape.style.height = `${size}px`;
+      
+      shape.style.left = `${Math.random() * 100}%`;
+      shape.style.top = `${Math.random() * 100}%`;
+      
+      shapesContainer.appendChild(shape);
+    }
+    
+    // Password visibility toggle
+    const togglePassword = document.querySelector('.password-toggle');
+    const passwordInput = document.querySelector('#password');
+    
+    togglePassword.addEventListener('click', function() {
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+      this.textContent = type === 'password' ? '👁️' : '🔒';
+    });
+  </script>
+</body>
+</html>

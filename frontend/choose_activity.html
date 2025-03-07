@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Language Learning Menu</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #3f51b5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .background-pattern {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0.05;
+      background-image: radial-gradient(circle, #fff 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+    
+    .menu-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      z-index: 1;
+      padding: 20px;
+    }
+    
+    .menu-title {
+      color: white;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeIn 0.8s forwards;
+    }
+    
+    .menu-btn {
+      background-color: white;
+      color: #3f51b5;
+      border: none;
+      border-radius: 50px;
+      padding: 12px 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      width: 220px;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    
+    .menu-btn:nth-child(2) {
+      animation: slideUp 0.5s 0.2s forwards;
+    }
+    
+    .menu-btn:nth-child(3) {
+      animation: slideUp 0.5s 0.4s forwards;
+    }
+    
+    .menu-btn:nth-child(4) {
+      animation: slideUp 0.5s 0.6s forwards;
+    }
+    
+    .menu-btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+      background-color: #f8f8f8;
+    }
+    
+    .menu-btn:active {
+      transform: translateY(0) scale(0.98);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    }
+    
+    .icon {
+      margin-right: 10px;
+      font-size: 1.1rem;
+    }
+    
+    .back-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .back-btn:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+      transform: translateX(-3px);
+    }
+    
+    .footer {
+      position: absolute;
+      bottom: 20px;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.8rem;
+      text-align: center;
+    }
+    
+    .user-profile {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: rgba(255, 255, 255, 0.2);
+      color: white;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .user-profile:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+    
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes slideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .menu-btn {
+        width: 200px;
+        padding: 10px 20px;
+      }
+      
+      .menu-title {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="background-pattern"></div>
+  
+  <button class="back-btn">
+    ←
+  </button>
+  
+  <div class="user-profile">
+    👤
+  </div>
+  
+  <div class="menu-container">
+    <h1 class="menu-title">Choose Activity</h1>
+    
+    <button class="menu-btn" id="writingBtn">
+      <span class="icon">✏️</span>Writing Practice
+    </button>
+    
+    <button class="menu-btn" id="grammarBtn">
+      <span class="icon">📝</span>Grammar Lessons
+    </button>
+    
+    <button class="menu-btn" id="vocabularyBtn">
+      <span class="icon">📚</span>Vocabulary
+    </button>
+  </div>
+  
+  <div class="footer">
+    Choose which category you would like to focus on
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add button functionality
+      document.getElementById('writingBtn').addEventListener('click', function() {
+        // In a real app, this would navigate to the writing practice page
+        window.location.href = "writing_practice.html";
+      });
+      
+      document.getElementById('grammarBtn').addEventListener('click', function() {
+        // In a real app, this would navigate to the grammar lessons page
+        window.location.href = "#grammar-lessons";
+      });
+      
+      document.getElementById('vocabularyBtn').addEventListener('click', function() {
+        // In a real app, this would navigate to the vocabulary page
+        window.location.href = "#vocabulary";
+      });
+      
+      document.querySelector('.back-btn').addEventListener('click', function() {
+        // In a real app, this would go back to the previous page
+        history.back();
+      });
+      
+      document.querySelector('.user-profile').addEventListener('click', function() {
+        // In a real app, this would open the user profile
+        window.location.href = "#user-profile";
+      });
+    });
+  </script>
+</body>
+</html>
